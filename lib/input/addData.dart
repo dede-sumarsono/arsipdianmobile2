@@ -55,6 +55,15 @@ class _addDataState extends State<addData> {
     print(token);
   }
 
+  String? valueJenisLayanan = "masuk";
+  late int indexvalueJenisLayanan;
+
+  final statusJenisLayanan = [
+    'masuk',
+    'keluar',
+
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -141,6 +150,71 @@ class _addDataState extends State<addData> {
                                         controller: _tanggal,
                                         validator: (value) => value!.isEmpty ? 'Masukan Tanggal' : null
                                     ),
+
+                                    new Padding(padding: new EdgeInsets.only(top:10.0)),
+
+                                    /////////////////////////Surat Masuk Surat Keluar
+
+                                    ////////////////JENIS LAYANAN
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(height: 10,),
+                                        Text(
+                                          'Jenis Surat',
+                                        ),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        Container(
+                                          width: MediaQuery.of(context).size.width,
+                                          // height: 50,
+                                          decoration: BoxDecoration(
+                                              //color: Color(0xffEBE3CC80),
+                                            color: Colors.white,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  //color: Colors.black.withOpacity(0.05),
+                                                    color: Colors.black.withOpacity(0.25),
+                                                    spreadRadius: 1,
+                                                    blurRadius: 1)
+                                              ],
+                                              borderRadius: BorderRadius.circular(10)),
+                                          child: Row(
+                                            children: [
+                                              Expanded(
+                                                child: DropdownButtonHideUnderline(
+                                                  child: DropdownButton<String>(
+                                                    value: valueJenisLayanan,
+                                                    iconSize: 30,
+                                                    isExpanded: true,
+                                                    icon: Icon(Icons.arrow_drop_down,color: Colors.grey,),
+                                                    //items: itemsList.map(buildMenuItem).toList(),
+                                                    items: statusJenisLayanan.map(buildMenuItem).toList(),
+                                                    onChanged: (value) => setState(() {
+                                                      this.valueJenisLayanan = value;
+
+                                                      print(valueJenisLayanan);
+                                                      print(statusJenisLayanan.indexOf(value!));
+
+                                                      this.indexvalueJenisLayanan = statusJenisLayanan.indexOf(value!);
+                                                      print('valuenya adalah $indexvalueJenisLayanan');
+                                                      print('value jenis layanannya adalah $valueJenisLayanan');
+
+                                                    }),
+                                                  ),
+                                                ),
+                                              ),
+
+
+
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+
+                                    /////////////////////////Surat Masuk Surat Keluar
 
                                     new Padding(padding: new EdgeInsets.only(top:20.0)),
 
@@ -355,6 +429,7 @@ class _addDataState extends State<addData> {
       FormData data = FormData.fromMap({
         'atas_nama': _atas_nama.text,
         'keterangan': _keterangan.text,
+        'surat': valueJenisLayanan,
         'tanggal_pembuatan': _tanggal.text,
         'file': await MultipartFile.fromFile(filePath, filename: fileName)
       });
@@ -389,4 +464,15 @@ class _addDataState extends State<addData> {
       print("Result is null");
     }
   }
+
+  DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
+    value: item,
+    child: Padding(
+      padding: EdgeInsets.only(left: 10),
+      child: Text(item,
+        style: TextStyle(fontSize: 14),
+      ),
+    ),
+  );
+
 }

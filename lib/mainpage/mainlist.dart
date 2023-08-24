@@ -40,7 +40,9 @@ with SingleTickerProviderStateMixin {
     Provider.of<Auth>(context, listen: false).tryToken(token: token!);
     print(token);
   }*/
-  Map<String, String> data = {"start_date":"","end_date":""};
+
+  //Map<String, String> data = {"start_date":"","end_date":"","surat":"masuk"};
+  Map<String, String> data = {"surat":"masuk"};
 
   //DIOOOO
   void getData() async {
@@ -144,7 +146,7 @@ with SingleTickerProviderStateMixin {
         child: Column(
           children: [
             SizedBox(
-              height: 260,
+              height: 200,
               child: Stack(
                 children: [
                   Column(
@@ -152,7 +154,8 @@ with SingleTickerProviderStateMixin {
                       Container(
                         width: double.infinity,
                         //height: 240,
-                        height: 220,
+                        //height: 220,
+                        height: 150,
                         decoration: BoxDecoration(
                           color: Colors.blue,
                           borderRadius: BorderRadius.only(
@@ -174,7 +177,7 @@ with SingleTickerProviderStateMixin {
                             Column(
                               children: [
                                 SizedBox(height: 35,),
-                                Center(
+                                /*Center(
                                   child: Text("Masukan Rentang Tanggal Pembuatan Akta",
                                     style: TextStyle(
                                         fontSize: 15,
@@ -182,9 +185,9 @@ with SingleTickerProviderStateMixin {
                                         fontWeight: FontWeight.w600
                                     ),
                                   ),
-                                ),
+                                ),*/
 
-                                Padding(
+                                /*Padding(
                                   padding: const EdgeInsets.only(top: 10,bottom: 8,right: 8,left: 8),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -274,12 +277,14 @@ with SingleTickerProviderStateMixin {
 
                                     ],
                                   ),
-                                ),
+                                ),*/
 
 
                                 Row(
                                   children: [
                                     //SizedBox(width: ,),
+
+                                    Spacer(),
 
                                     SingleChildScrollView(
                                       child: Padding(
@@ -309,6 +314,15 @@ with SingleTickerProviderStateMixin {
                                                       controller: tabController,
                                                       onTap: (int index){
                                                         setState(() {
+
+                                                          if (index == 1){
+                                                            data["surat"] = "keluar";
+                                                          }else if (index == 0){
+                                                            data["surat"] = "masuk";
+                                                          }
+                                                          getData();
+                                                          print(data);
+
                                                           print('yang dipilih adalah $index');
                                                         });
                                                       },
@@ -331,7 +345,7 @@ with SingleTickerProviderStateMixin {
                                     ),
 
                                     Spacer(),
-                                    ElevatedButton(
+                                    /*ElevatedButton(
                                         onPressed: (){
                                           setState(() {
                                             getData();
@@ -343,8 +357,8 @@ with SingleTickerProviderStateMixin {
                                         backgroundColor: MaterialStateProperty.all(Colors.white70),
                                       ),
 
-                                    ),
-                                    SizedBox(width: 20,),
+                                    ),*/
+                                    //SizedBox(width: 20,),
                                   ],
                                 ),
 
@@ -368,7 +382,7 @@ with SingleTickerProviderStateMixin {
                     ],
                   ),
                   Positioned(
-                    top: 190,
+                    top: 120,
                     left: MediaQuery.of(context).size.width*0.11,
                     child: Container(
                       //height: 100,
@@ -410,7 +424,7 @@ with SingleTickerProviderStateMixin {
 
                 :Expanded(
               child: Padding(
-                padding: const EdgeInsets.only(right: 10,left: 10,top: 10),
+                padding: const EdgeInsets.only(right: 10,left: 10),
                 child: ListView.builder(
                     itemCount: jsonListConvert == null ? 0 : jsonListConvert.length,
                     itemBuilder: (BuildContext context,int index ){
