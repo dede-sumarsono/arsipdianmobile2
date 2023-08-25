@@ -61,6 +61,7 @@ class _addDataState extends State<addData> {
   final statusJenisLayanan = [
     'masuk',
     'keluar',
+    'berkas akad'
 
   ];
 

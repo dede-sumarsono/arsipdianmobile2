@@ -103,7 +103,7 @@ with SingleTickerProviderStateMixin {
   @override
   void initState(){
     getData();
-    tabController = TabController(length: 2,vsync: this);
+    tabController = TabController(length: 3,vsync: this);
   }
 
   _runFilter(String enteredKeyword) {
@@ -284,16 +284,17 @@ with SingleTickerProviderStateMixin {
                                   children: [
                                     //SizedBox(width: ,),
 
-                                    Spacer(),
+                                    //Spacer(),
 
                                     SingleChildScrollView(
                                       child: Padding(
                                         padding: EdgeInsets.symmetric(horizontal: 20),
                                         child: Column(
                                           children: [
+                                            SizedBox(height: 10,),
                                             Container(
                                               //height: 20,
-                                              width: MediaQuery.of(context).size.width*0.6,
+                                              width: MediaQuery.of(context).size.width*0.9,
                                               decoration: BoxDecoration(
                                                 color: Colors.white38,
                                                 borderRadius: BorderRadius.circular(5),
@@ -319,6 +320,8 @@ with SingleTickerProviderStateMixin {
                                                             data["surat"] = "keluar";
                                                           }else if (index == 0){
                                                             data["surat"] = "masuk";
+                                                          }else if (index == 2){
+                                                            data["surat"] = "berkas akad";
                                                           }
                                                           getData();
                                                           print(data);
@@ -333,6 +336,9 @@ with SingleTickerProviderStateMixin {
                                                         Tab(
                                                           text: 'S Keluar',
                                                         ),
+                                                        Tab(
+                                                          text: 'Akad',
+                                                        ),
                                                       ],
                                                     ),
                                                   ),
@@ -344,7 +350,7 @@ with SingleTickerProviderStateMixin {
                                       ),
                                     ),
 
-                                    Spacer(),
+                                    //Spacer(),
                                     /*ElevatedButton(
                                         onPressed: (){
                                           setState(() {

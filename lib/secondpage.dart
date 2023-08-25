@@ -46,7 +46,7 @@ class _SecondPageState extends State<SecondPage> {
     Provider.of<Auth>(context, listen: false).tryToken(token: token!);
     print(token);
   }*/
-  Map<String, String> data = {"start_date":"","end_date":""};
+  //Map<String, String> data = {"start_date":"","end_date":""};
 
   //DIOOOO
   void getData() async {
@@ -75,8 +75,8 @@ class _SecondPageState extends State<SecondPage> {
 
 
 
-      Dio.Response response = await dio().get('/filter',
-        data: data,
+      Dio.Response response = await dio().get('/posts',
+        //data: data,
         options: Dio.Options(headers: {'Authorization': 'Bearer $token'}),
       );
 
